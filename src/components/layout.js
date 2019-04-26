@@ -8,9 +8,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
+import { OutboundLink } from "gatsby-plugin-google-analytics"
 
 import Header from "./header"
-import "./layout.css"
+import "./layout.sass"
+import Helmet from "react-helmet"
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -25,6 +27,13 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
+        <Helmet>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          />
+        </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
           style={{
@@ -36,9 +45,11 @@ const Layout = ({ children }) => (
         >
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()}, Built with
+            © Darin Levesque {new Date().getFullYear()}, Built with
             {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <OutboundLink href="https://www.gatsbyjs.org">Gatsby</OutboundLink>,
+            Served with{" "}
+            <OutboundLink href="https://netlify.com">Netlify</OutboundLink>.
           </footer>
         </div>
       </>
